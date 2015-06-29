@@ -48,3 +48,8 @@ Route::get('/articles/{id}',
         'as' => 'article.show',
         'uses' => 'ArticlesControl@show'
     ]);
+Route::delete('/articles/{id}',
+    [
+        'as' => 'article.destroy',
+        'uses' => 'ArticlesControl@destroy'
+    ]);

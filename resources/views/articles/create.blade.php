@@ -33,7 +33,7 @@ Thêm một bài viết mới vào Blog
                 </div>
                 <div class="form-group">
                     <label for="title" class="control-label">Nội dung bài viết</label>
-                    <input type="text" class="form-control" name="content" id="content" required placeholder="Hãy điền nội dung bài viết"/>
+                    <textarea name="content" id="content" class="form-control" rows="10" required placeholder="Hãy điền nội dung bài viết"></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary">{{{ trans('labels.submit_article') }}}</button>

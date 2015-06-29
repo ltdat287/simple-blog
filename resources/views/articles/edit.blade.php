@@ -25,7 +25,8 @@ Chỉnh sửa bài viết
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('article.update',$baiviet->id) }}" method="PUT" class="form-horizontal">
+            <form action="{{ route('article.update',$baiviet->id) }}" method="POST" class="form-horizontal">
+                <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                 <div class="form-group">
                     <label for="title" class="control-label">Tiêu đề bài viết</label>
@@ -33,7 +34,7 @@ Chỉnh sửa bài viết
                 </div>
                 <div class="form-group">
                     <label for="title" class="control-label">Nội dung bài viết</label>
-                    <input type="text" class="form-control" name="content" id="content" required placeholder="Hãy điền nội dung bài viết" value="{{ $baiviet->content }}"/>
+                    <textarea name="content" id="content" class="form-control" rows="10" placeholder="Hãy điền nội dung bài viết">{{ $baiviet->content }}</textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary">Cập nhật</button>

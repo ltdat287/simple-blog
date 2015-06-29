@@ -15,5 +15,11 @@ Danh sach cac bai viet
         </div>
     </div>
     @endforeach
+
+    <div class="row text-center">
+        <div class="col-sm-6 col-sm-offset-3">
+            {!! $articles->render() !!}
+        </div>
+    </div>
 </div>
 @stop

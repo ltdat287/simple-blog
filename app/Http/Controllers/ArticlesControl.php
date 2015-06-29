@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 //use Illuminate\Http\Request;
-use App\Article;
-use App\Http\Requests;
 use App\Http\Requests\ArticleFormRequest;
+use App\Models\Article;
+//use App\Http\Requests;
+//use App\Http\Requests\ArticleFormRequest;
 use App\Http\Controllers\Controller;
-use Mockery\CountValidator\Exception;
+//use Mockery\CountValidator\Exception;
 use Validator;
 use Input;
 use Request;
@@ -21,7 +22,7 @@ class ArticlesControl extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate(4);
 
         return view('articles.index',compact('articles'));
     }
@@ -49,9 +50,8 @@ class ArticlesControl extends Controller
     }
 
     /**
-     * Process save article.
+     * store article to database and redirect to articles.index
      *
-     * @param ArticleFormRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
@@ -78,7 +78,7 @@ class ArticlesControl extends Controller
             );
             $record = Article::create($data);
         } catch (Exception $ex) {
-            
+
         }
         if (! empty($title) && ! empty($content)) {
 
@@ -100,12 +100,28 @@ class ArticlesControl extends Controller
     }
 
     /**
-     * For update article
+     * Find id update articles and redirect asticle.show with $id
      *
      * @param $id
+     * @param ArticleFormRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     *
      */
-    public function update($id)
+    public function update($id,ArticleFormRequest $request)
     {
-        dd($id);
+        $articles = Article::find($id);
+        $update = $articles->update(
+        [
+            'title' => $request->input('title'),
+            'content' => $request->input('content')
+        ]);
+        return redirect()->route('article.show',$id);
+    }
+
+    public function destroy($id)
+    {
+        $articles = Article::find($id);
+        $destroy = $articles->delete();
+        return redirect()->route('article.index');
     }
 }
