@@ -36,7 +36,7 @@ Thêm một bài viết mới vào Blog
                     <input type="text" class="form-control" name="content" id="content" required placeholder="Hãy điền nội dung bài viết"/>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary">Viết bài</button>
+                    <button class="btn btn-primary">{{{ trans('labels.submit_article') }}}</button>
                 </div>
             </form>
         </div>
