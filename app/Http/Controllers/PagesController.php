@@ -12,6 +12,6 @@ class PagesController extends Controller
     //
     public function index()
     {
-        return redirect('/articles');
+        return redirect('/index.php/articles');
     }
 }
