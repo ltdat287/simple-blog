@@ -15,5 +15,11 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="{{ route('article.create') }}">New Articles</a></li>
 		</ul>
+		<ul class="nav navbar-nav navbar-right">
+            <li class="active">
+
+                <a class="button button--primary button--withChrome" href="/">Sign in / Sign up</a>
+            </li>
+        </ul>
 	</div><!-- /.navbar-collapse -->
 </nav>

@@ -13,13 +13,16 @@
 
 Route::get('/', 'PagesController@index');
 
+Route::get('/login', array('as' => 'member.login', 'uses' => 'PagesController@login'));
+Route::post('/login', array('as' => 'post.login', 'uses' => 'MembersController@index'));
+
 Route::get('/articles',
     [
         'as' => 'article.index',
         'uses' => 'ArticlesControl@index'
     ]);
 
-post('/articles',
+Route::post('/articles',
     [
         'as'=>'article.store',
         'uses'=>'ArticlesControl@store'
@@ -31,13 +34,13 @@ Route::get('/articles/create',
         'uses' => 'ArticlesControl@create'
     ]);
 
-get('/articles/{id}/edit',
+Route::get('/articles/{id}/edit',
     [
         'as' => 'article.edit',
         'uses' => 'ArticlesControl@edit'
     ]);
 
-put('/articles/{id}',
+Route::put('/articles/{id}',
     [
         'as' => 'article.update',
         'uses' => 'ArticlesControl@update'
@@ -53,3 +56,4 @@ Route::delete('/articles/{id}',
         'as' => 'article.destroy',
         'uses' => 'ArticlesControl@destroy'
     ]);
+

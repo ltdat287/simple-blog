@@ -9,9 +9,19 @@ use App\Http\Controllers\Controller;
 
 class PagesController extends Controller
 {
-    //
+    /**
+     * View all articles
+     */
     public function index()
     {
         return redirect('/index.php/articles');
+    }
+
+    /**
+     * View form login
+     */
+    public function login()
+    {
+    	return view('members.login');
     }
 }
