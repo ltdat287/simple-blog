@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Models\User;
+use Validator;
 
 class StartApp extends Command
 {
@@ -37,25 +39,38 @@ class StartApp extends Command
      */
     public function handle()
     {
-        //
+        //Create sample user admin
+        $name     = 'ltdat287';
+        $email    = 'ltdat287@gmail.com';
+        $password = 'sometimeka';
+
+        $password = ($password) ? bcrypt($password) : '';
+
+        //Create array data send to server
         $data = array(
-            'name' => 'ltdat287',
-            'email' => 'letiendat287@gmail.com',
-            'password' => 'sometimeka'
+            'name'     => $name,
+            'email'    => $email,
+            'password' => $password,
+            'password_confirmation' => $password
         );
-        
-        //Check registra when user register
-        $register = new Registrar();
-        $validator = $registrar->validator($data);
-        
-        if (! $validator->fails())
+
+        //Validator request send from user
+        $valids = Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|max:255|unique:users',
+            'password' => 'required|confirmed|min:6'
+        ]);
+
+        //Send messages error to brower if not validate
+        if (! $valids->fails())
         {
             $user = User::create($data);
-        } 
-        else 
+            $this->info("Insert information user success!");
+        }
+        else
         {
             //return messages error to Console
-            foreach ($validator->messages()->all() as $message)
+            foreach ($valids->messages()->all() as $message)
             {
                 $this->error($message);
             }
