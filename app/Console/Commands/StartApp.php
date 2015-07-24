@@ -38,5 +38,28 @@ class StartApp extends Command
     public function handle()
     {
         //
+        $data = array(
+            'name' => 'ltdat287',
+            'email' => 'letiendat287@gmail.com',
+            'password' => 'sometimeka'
+        );
+        
+        //Check registra when user register
+        $register = new Registrar();
+        $validator = $registrar->validator($data);
+        
+        if (! $validator->fails())
+        {
+            $user = User::create($data);
+        } 
+        else 
+        {
+            //return messages error to Console
+            foreach ($validator->messages()->all() as $message)
+            {
+                $this->error($message);
+            }
+            exit();
+        }
     }
 }
